@@ -11,14 +11,22 @@ const fakeBooks = [
   }
 ]
 
-const MongoLibStub = {
-  getAll: () =>
-    Promise.resolve(fakeBooks),
-  create: () =>
-    Promise.resolve(fakeBooks[0])
-}
+const fakeBooksCase2 = [
+  {
+    _id: '1',
+    title: 'Rich Dad Poor Dad'
+  }
+]
 
-jest.mock('../lib/mongo.lib', () => jest.fn().mockImplementation(() => MongoLibStub))
+const mockGetAll = jest.fn()
+
+jest.mock('../lib/mongo.lib', () => jest.fn().mockImplementation(() => (
+  {
+    getAll: mockGetAll,
+    create: () =>
+      Promise.resolve(fakeBooks[0])
+  }
+)))
 
 describe('Test for BooksService', () => {
   // Arrange
@@ -33,19 +41,24 @@ describe('Test for BooksService', () => {
   describe('test for getBooks', () => {
     test('should return a list of books', async () => {
       // Arrange
+      mockGetAll.mockResolvedValue(fakeBooks)
       // Act
       const books = await service.getBooks()
       console.log('books', books)
       // Assert
       expect(books.length).toEqual(2)
+      expect(mockGetAll).toHaveBeenCalled()
+      expect(mockGetAll).toHaveBeenCalledTimes(1)
+      expect(mockGetAll).toHaveBeenCalledWith('books', {})
     })
-    test('should return a string equal to Book 1', async () => {
+    test('should return a string equal to expected book title', async () => {
       // Arrange
+      mockGetAll.mockResolvedValue(fakeBooksCase2)
       // Act
       const books = await service.getBooks()
       console.log('books', books)
       // Assert
-      expect(books[0].title).toEqual('Book 1')
+      expect(books[0].title).toEqual('Rich Dad Poor Dad')
     })
   })
 })

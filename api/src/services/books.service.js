@@ -6,11 +6,11 @@ class BooksService {
     this.mongoDB = new MongoLib()
   }
 
-  getBooks (query) {
+  getBooks (query = {}) {
     return this.mongoDB.getAll(this.collection, query)
   }
 
-  createBook (newBook) {
+  createBook (newBook = {}) {
     return this.mongoDB.create(this.collection, newBook)
   }
 }
