@@ -1,10 +1,10 @@
-import express from 'express';
-import booksRouter from './books.router';
+import express from 'express'
+import booksRouter from './books.router'
 
-function routerApi(app) {
-  const router = express.Router();
-  app.use('/api/v1', router);
-  router.use('/books', booksRouter);
+function routerApi (app) {
+  const router = express.Router()
+  app.use('/api/v1', router)
+  router.use('/books', booksRouter)
 }
 
-export default routerApi;
+export default routerApi

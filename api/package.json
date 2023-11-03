@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "node --experimental-specifier-resolution=node src/index.js",
-    "start:dev": "DEBUG=app:* nodemon --experimental-specifier-resolution=node src/index.js",
+    "start:dev": "DEBUG=app:* nodemon --experimental-specifier-resolution=node  --experimental-vm-modules src/index.js",
     "start:prod": "NODE_ENV=production node src/index.js",
     "test": "jest",
     "lint": "eslint src/**",
@@ -22,9 +22,12 @@
     "mongodb": "^4.4.1"
   },
   "devDependencies": {
-    "eslint": "^8.10.0",
-    "eslint-config-airbnb-base": "^15.0.0",
-    "eslint-plugin-import": "^2.25.4",
+    "@babel/preset-env": "^7.23.2",
+    "eslint": "^8.52.0",
+    "eslint-config-standard": "^17.1.0",
+    "eslint-plugin-import": "^2.29.0",
+    "eslint-plugin-n": "^16.2.0",
+    "eslint-plugin-promise": "^6.1.1",
     "jest": "^27.5.1",
     "nodemon": "^2.0.15"
   }
