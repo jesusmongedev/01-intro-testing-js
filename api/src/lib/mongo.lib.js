@@ -50,10 +50,6 @@ class MongoLib {
     const db = await this.connect()
     return db.collection(collection).deleteOne({ _id: ObjectId(id) })
   }
-
-  async disconnect () {
-    await this.client.close()
-  }
 }
 
 export default MongoLib
