@@ -1,8 +1,9 @@
+import { config } from '../config'
 import MongoLib from '../lib/mongo.lib'
 
 class BooksService {
   constructor () {
-    this.collection = 'books'
+    this.collection = config.bookCollection
     this.mongoDB = new MongoLib()
   }
 

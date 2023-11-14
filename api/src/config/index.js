@@ -1,13 +1,16 @@
 import dotenv from 'dotenv'
 
 dotenv.config()
+const isProd = process.env.NODE_ENV === 'production'
+const prodDbUrl = process.env.DB_URL
+const testDbUrl = process.env.TEST_DB_URL
+const dbUrl = isProd ? prodDbUrl : testDbUrl
 
 const config = {
-  env: process.env.NODE_ENV || 'dev',
-  isProd: process.env.NODE_ENV === 'production',
   port: process.env.PORT || 3000,
-  dbUrl: process.env.MONGO_URL,
-  dbName: process.env.MONGO_DB_NAME
+  dbUrl,
+  dbName: process.env.DB_NAME,
+  bookCollection: process.env.BOOK_COLLECTION
 }
 
 export { config }
